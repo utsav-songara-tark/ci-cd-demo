@@ -26,7 +26,6 @@ jobs:
       - name: Read Metadata
         id: metadata
         run: |
-          $envVars = Get-Content ${{ github.workspace }}/metadata.env | ConvertFrom-StringData
           echo "version=1.1.409" >> $env:GITHUB_ENV
           echo "commit_sha=35ebc8f2a10253aa1ce111102f7ef65683f44a71" >> $env:GITHUB_ENV
         shell: powershell
