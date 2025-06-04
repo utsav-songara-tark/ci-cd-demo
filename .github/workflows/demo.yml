@@ -22,12 +22,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Create Metadata file
+        run: |
+          echo "version=1.1.409" >> ./metadata.env
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Read Metadata
         id: metadata
         run: |
-          echo "version=1.1.409" >> $env:GITHUB_ENV
-          echo "commit_sha=35ebc8f2a10253aa1ce111102f7ef65683f44a71" >> $env:GITHUB_ENV
+          $envVars = Get-Content ./metadata.env | ConvertFrom-StringData
+          echo "version=$($envVars['version'])" >> $env:GITHUB_ENV
         shell: powershell
 
       - name: Print Environment variable
