@@ -9,7 +9,7 @@ on:
 
 jobs:
   print_sha_from_run_id:
-    runs-on: [self-hosted, Windows]
+    runs-on: [windows-latest]
     steps:
       - name: Get commit SHA from build run
         id: extract
