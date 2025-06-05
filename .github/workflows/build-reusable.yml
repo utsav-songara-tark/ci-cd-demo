@@ -1,0 +1,21 @@
+name: Build Reusable
+
+on:
+  workflow_call:
+    outputs:
+      version:
+        description: "Build version"
+        value: ${{ jobs.build.outputs.version }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.set-version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set version
+        id: set-version
+        run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
