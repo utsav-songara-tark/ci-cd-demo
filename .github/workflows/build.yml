@@ -1,0 +1,33 @@
+name: Build Rule Engine Projects
+
+on:
+  push:
+     branches: 
+       - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Print Hello World
+        run: echo "Hello world"
+
+  deploy-dev:
+    needs: build
+    runs-on: [ubuntu-latest]
+    environment: DEV
+    
+    steps:
+      - name: Print Dev
+        run: echo "Hello Dev Environment"
+
+  deploy-prod:
+    needs: deploy-dev
+    runs-on: [ubuntu-latest]
+    environment: PROD
+    
+    steps:
+      - name: Print Prod
+        run: echo "Hello Prod Environment"
