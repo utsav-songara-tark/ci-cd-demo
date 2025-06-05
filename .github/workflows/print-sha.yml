@@ -21,3 +21,7 @@ jobs:
           $url = "https://api.github.com/repos/$repo/actions/runs/$run_id"
           $response = Invoke-RestMethod -Uri $url -Headers $headers
           echo "commit_sha=$($response.head_sha)" >> $env:GITHUB_OUTPUT
+
+      - name: Print commit hash
+        shell: powershell
+        run: echo ${{ env.commit_sha }}
