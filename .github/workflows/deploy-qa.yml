@@ -1,0 +1,12 @@
+name: Deploy to QA
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment: QA
