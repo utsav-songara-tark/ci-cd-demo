@@ -11,4 +11,4 @@ jobs:
     with:
       environment: QA
     secrets: 
-        ZIP_PASSWORD: ${{ secrets.ZIP_PASSWORD }}
+        ZIP_PASSWORD: "123"
