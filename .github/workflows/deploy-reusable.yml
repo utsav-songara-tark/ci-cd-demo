@@ -15,8 +15,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    env:
-        ZIP_PASSWORD: ${{ secrets.ZIP_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
