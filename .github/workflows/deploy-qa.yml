@@ -10,4 +10,5 @@ jobs:
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: QA
-    secrets: inherit
+    secrets: 
+        ZIP_PASSWORD: ${{ secrets.ZIP_PASSWORD }}
