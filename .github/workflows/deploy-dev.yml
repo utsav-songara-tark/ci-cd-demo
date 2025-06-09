@@ -1,6 +1,9 @@
 name: Deploy to DEV
 
 on:
+  push:
+     branches: 
+       - main
   workflow_dispatch:
 
 jobs:
@@ -8,3 +11,4 @@ jobs:
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: DEV
+    secrets: inherit
