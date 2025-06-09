@@ -1,28 +1,20 @@
-# .github/workflows/deploy-reusable.yml
-name: Reusable Deployment Workflow
+name: Deploy Reusable Workflow
 
 on:
   workflow_call:
     inputs:
-        environment:
-            required: true
-            type: string
-    secrets:
-        ZIP_PASSWORD:
-            required: true
+      environment:
+        required: true
+        type: string
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    env:
-        ZIP_PASSWORD: ${{ secrets.ZIP_PASSWORD }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Reusable Deployment Step
-        run: |
-            echo "Hello, this is a reusable workflow for deployment."
-            echo ${{ env.ZIP_PASSWORD }}
-            echo ${{ secrets.ZIP_PASSWORD }}
+    steps:
+      - name: Print Environment
+        run: echo "Deploying to ${{ inputs.environment }}"
+
+      - name: Use Secret
+        run: echo "Using secret token ${{ secrets.ZIP_PASSWORD }}"

@@ -1,14 +1,10 @@
 name: Deploy to DEV
 
 on:
-  push:
-    branches:
-        - main
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  call-deploy:
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: DEV
-    secrets: 
-        ZIP_PASSWORD: ${{ secrets.ZIP_PASSWORD }}
