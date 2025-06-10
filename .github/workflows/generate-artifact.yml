@@ -22,7 +22,7 @@ jobs:
           echo "$count" > commit_count.txt
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: commit-count-artifact
           path: commit_count.txt
