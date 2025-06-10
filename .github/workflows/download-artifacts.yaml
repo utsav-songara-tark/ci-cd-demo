@@ -17,4 +17,5 @@ jobs:
     steps:
         - name: Download artifacts from old build
           uses: dawidd6/action-download-artifact@v10
-          ref: ${{ github.event.inputs.tag }}
+          with:
+            ref: ${{ github.event.inputs.tag }}
