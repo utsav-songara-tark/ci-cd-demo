@@ -26,6 +26,8 @@ jobs:
           workflow_conclusion: success
           ref: ${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
           workflow: build-from-tag.yml  # The workflow that generated the artifact
+          check_artifacts: true
+          search_artifacts: true
 
       - name: Print downloaded artifact
         run: |
