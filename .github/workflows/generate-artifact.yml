@@ -1,0 +1,28 @@
+name: Generate Commit Count Artifact
+
+on:
+  push:
+    branches:
+      - main  # Or your target branch
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Commit Count
+        id: commit_count
+        run: |
+          count=$(git rev-list --count HEAD)
+          echo "Commit count: $count"
+          echo "$count" > commit_count.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: commit-count-artifact
+          path: commit_count.txt

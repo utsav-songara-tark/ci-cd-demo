@@ -1,0 +1,21 @@
+name: Generate Commit Count Artifact
+
+on:
+  push:
+    branches:
+      - main  # Or your target branch
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Pass tag id of build'
+        required: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Download artifacts from old build
+          uses: dawidd6/action-download-artifact@v10
+          with:
+            ref: ${{ github.event.inputs.tag }}
