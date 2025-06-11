@@ -1,0 +1,35 @@
+name: Download artifacts from a specific tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to download artifacts from build'
+        required: true
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0  # Fetch all history for all branches and tags
+            ref: ${{ github.event.inputs.tag }}  # Checkout the specific tag
+
+      - name: Download artifacts from tag
+        uses: dawidd6/action-download-artifact@v10
+        with:
+          name: hello-artifact
+          path: ${{ github.workspace }}/hello.txt
+          ref: ${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
+
+      - name: Print downloaded artifact
+        run: |
+          if [ -f ${{ github.workspace }}/hello.txt ]; then
+            echo "Artifact downloaded successfully:"
+            cat ${{ github.workspace }}/hello.txt
+          else
+            echo "Artifact not found."
+          fi

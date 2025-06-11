@@ -1,0 +1,25 @@
+name: Build Rule Engine Projects
+
+on:
+  push:
+     branches: 
+       - main
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build from'
+        required: true
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Print Hello World
+        run: echo "Hello world" > ${{ github.workspace }}/hello.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-artifact
+          path: ${{ github.workspace }}/hello.txt
