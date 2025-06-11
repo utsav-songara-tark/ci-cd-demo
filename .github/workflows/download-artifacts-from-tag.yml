@@ -24,6 +24,7 @@ jobs:
           name: hello-artifact
           path: ${{ github.workspace }}/hello.txt
           ref: ${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
+          workflow: build-from-tag.yml  # The workflow that generated the artifact
 
       - name: Print downloaded artifact
         run: |
