@@ -22,7 +22,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v10
         with:
           name: hello-artifact
-          ref: refs/tags/${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
+          ref: tags/${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
           workflow: build-from-tag.yml  # The workflow that generated the artifact
 
       - name: Print downloaded artifact
