@@ -21,8 +21,11 @@ jobs:
           fetch-depth: 0  # Fetch all history for all branches and tags
           ref: ${{ github.event.inputs.checkout_ref }}  # Checkout the specific branch, commit SHA, or tag
 
-      - name: Print Hello World
-        run: echo "Hello world" > ${{ github.workspace }}/hello.txt
+      - name: Create Hello World File with commit SHA
+        run: |
+          commit_sha=$(git rev-parse HEAD)
+          echo "Hello World from commit $commit_sha" > hello.txt
+          echo "Current commit SHA: $commit_sha"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
