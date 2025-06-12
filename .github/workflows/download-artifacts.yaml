@@ -1,9 +1,9 @@
 name: Generate Commit Count Artifact
 
 on:
-  push:
-    branches:
-      - main  # Or your target branch
+  # push:
+  #   branches:
+  #     - main  # Or your target branch
   workflow_dispatch:
     inputs:
       tag:

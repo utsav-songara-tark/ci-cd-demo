@@ -3,8 +3,8 @@ name: Download artifacts from a specific tag
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Tag to download artifacts from build'
+      checkout_ref:
+        description: 'Provide branch name or commit SHA or tag id of build'
         required: true
 
 jobs:
@@ -16,15 +16,22 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 0  # Fetch all history for all branches and tags
-            ref: ${{ github.event.inputs.tag }}  # Checkout the specific tag
+            ref: ${{ github.event.inputs.checkout_ref }}  # Checkout the specific tag
 
-      - name: Download artifacts from tag
+      - name: Get Current commit SHA
+        id: get_commit_sha
+        run: |
+          commit_sha=$(git rev-parse HEAD)
+          echo "Current commit SHA: $commit_sha"
+          echo "commit_sha=$commit_sha" >> $GITHUB_ENV
+
+      - name: Download artifacts from commit SHA
         uses: dawidd6/action-download-artifact@v10
         with:
           name: hello-artifact
           workflow_search: true  # Search for the workflow that generated the artifact
           workflow_conclusion: success
-          ref: ${{ github.event.inputs.tag }}  # Specify the tag to download artifacts from
+          ref: ${{ env.commit_sha }}  # Specify the tag to download artifacts from
           workflow: build-from-tag.yml  # The workflow that generated the artifact
           check_artifacts: true
           search_artifacts: true

@@ -6,8 +6,8 @@ on:
        - main
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Tag to build from'
+      checkout_ref:
+        description: 'Provide branch name or commit SHA or tag id of build'
         required: true
 
 jobs:
@@ -15,6 +15,12 @@ jobs:
     runs-on: [ubuntu-latest]
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
+          ref: ${{ github.event.inputs.checkout_ref }}  # Checkout the specific branch, commit SHA, or tag
+
       - name: Print Hello World
         run: echo "Hello world" > ${{ github.workspace }}/hello.txt
 
