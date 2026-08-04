@@ -1,7 +1,33 @@
 name: Parallel and Sequential Jobs
 
+run-name: >-
+  Deploy ${{ inputs.service }} to qa-demo${{ inputs.commit-ref != '' && format(' @ {0}', inputs.commit-ref) || '' }}${{ inputs.deploy == false && ' [build only]' || '' }}
+
 on:
   workflow_dispatch:
+    inputs:
+      service:
+        description: 'Service to build and deploy, or `all` to deploy every service in dependency order'
+        required: true
+        type: choice
+        options:
+          - all
+          - rule-configuration-service
+          - rule-editor-service
+          - rule-parser-service
+          - reporting-service
+          - rule-execution-agent
+          - rule-delegation-service
+      commit-ref:
+        description: 'Commit ref to build (blank = the ref that triggered this run)'
+        required: false
+        type: string
+        default: ''
+      deploy:
+        description: Deploy to ECS after push
+        required: false
+        type: boolean
+        default: true
 
 jobs:
 
