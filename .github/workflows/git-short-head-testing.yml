@@ -1,4 +1,4 @@
-```yaml
+
 name: Git Short SHA Experiment
 
 on:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   full-clone:
-    name: Full clone (fetch-depth: 0)
+    name: Full clone - fetch-depth 0
     runs-on: ubuntu-latest
 
     steps:
@@ -19,29 +19,27 @@ jobs:
         shell: bash
         run: |
           echo "=== Full Clone ==="
-
           echo "Full SHA:"
           git rev-parse HEAD
 
-          echo
-          echo "git rev-parse --short HEAD:"
+          echo ""
+          echo "Short SHA:"
           git rev-parse --short HEAD
 
-          echo
-          echo "git rev-parse --short=7 HEAD:"
+          echo ""
+          echo "Short SHA (7):"
           git rev-parse --short=7 HEAD
 
-          echo
+          echo ""
           echo "Commit count:"
           git rev-list --all --count
 
-          echo
+          echo ""
           echo "Object count:"
           git count-objects -v
 
-
   shallow-clone:
-    name: Shallow clone (fetch-depth: 1)
+    name: Shallow clone - fetch-depth 1
     runs-on: ubuntu-latest
 
     steps:
@@ -54,23 +52,21 @@ jobs:
         shell: bash
         run: |
           echo "=== Shallow Clone ==="
-
           echo "Full SHA:"
           git rev-parse HEAD
 
-          echo
-          echo "git rev-parse --short HEAD:"
+          echo ""
+          echo "Short SHA:"
           git rev-parse --short HEAD
 
-          echo
-          echo "git rev-parse --short=7 HEAD:"
+          echo ""
+          echo "Short SHA (7):"
           git rev-parse --short=7 HEAD
 
-          echo
+          echo ""
           echo "Commit count:"
           git rev-list --all --count
 
-          echo
+          echo ""
           echo "Object count:"
           git count-objects -v
-```
